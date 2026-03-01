@@ -1,0 +1,47 @@
+import subprocess
+import sys
+import importlib.util
+
+def check_and_install(package_name, pip_name=None):
+    """Проверяет наличие пакета и устанавливает если его нет"""
+    if pip_name is None:
+        pip_name = package_name
+    
+    spec = importlib.util.find_spec(package_name)
+    if spec is None:
+        print(f"Установка {pip_name}...")
+        try:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", pip_name])
+            print(f"✓ {pip_name} успешно установлен")
+        except subprocess.CalledProcessError:
+            print(f"✗ Ошибка при установке {pip_name}")
+            return False
+    else:
+        print(f"✓ {package_name} уже установлен")
+    return True
+
+def main():
+    print("Проверка и установка зависимостей...")
+    print("-" * 40)
+    
+    # Список зависимостей
+    dependencies = [
+        ("requests", "requests"),
+        ("PIL", "Pillow"),
+        ("telegram", "python-telegram-bot"),
+    ]
+    
+    success = True
+    for package_name, pip_name in dependencies:
+        if not check_and_install(package_name, pip_name):
+            success = False
+    
+    if success:
+        print("-" * 40)
+        print("✅ Все зависимости успешно установлены!")
+    else:
+        print("-" * 40)
+        print("❌ Некоторые зависимости не удалось установить")
+
+if __name__ == "__main__":
+    main()
