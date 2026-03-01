@@ -21,7 +21,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Конфигурация
-BOT_TOKEN = "7386282153:AAHyO1n7W3Boy8pe58d-zTUEdq0FxDY4RRs"  # Замените на ваш токен
+BOT_TOKEN = -zTUEdq0FxDY4RRs"  # Замените на ваш токен
 API_BASE_URL = "https://rscripts.net/api/v2"
 
 # Глобальные переменные для кэширования
